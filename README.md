@@ -1,3 +1,3 @@
-# sklearn
+# classification algorithm
 
-主要介绍sklearn库的用法
+主要介绍常用的分类算法
