@@ -81,15 +81,15 @@ MLP 的 BP 算法基于经典的链式求导法则，首先看前向传导，对
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=y_{i}=\frac{e^{\alpha_{i}}}{\sum&space;_{j}e^{\alpha_{j}}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?y_{i}=\frac{e^{\alpha_{i}}}{\sum&space;_{j}e^{\alpha_{j}}}" title="y_{i}=\frac{e^{\alpha_{i}}}{\sum _{j}e^{\alpha_{j}}}" /></a>
 
-根据以上分析，可得到$y_{k^{'}}$关于$\alpha_{k}$的导数：
+根据以上分析，可得到<a href="https://www.codecogs.com/eqnedit.php?latex=y_{k^{'}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?y_{k^{'}}" title="y_{k^{'}}" /></a>关于<a href="https://www.codecogs.com/eqnedit.php?latex=\alpha_{k}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha_{k}" title="\alpha_{k}" /></a>的导数：
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190602201912319.png)
 
-现在能得到损失函数O对于$\alpha_{k}$的导数：
+现在能得到损失函数O对于<a href="https://www.codecogs.com/eqnedit.php?latex=\alpha_{k}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha_{k}" title="\alpha_{k}" /></a>的导数：
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190602202002159.png)
 
-这里有$\sum_{i}z_{i}=1$，即只有一个类别，到这一步，softmax和sigmod的残差均计算完成，可用$\sigma$来表示，对于单元j，其形式如下：
+这里有<a href="https://www.codecogs.com/eqnedit.php?latex=\sum_{i}z_{i}=1" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\sum_{i}z_{i}=1" title="\sum_{i}z_{i}=1" /></a>，即只有一个类别，到这一步，softmax和sigmod的残差均计算完成，可用<a href="https://www.codecogs.com/eqnedit.php?latex=\sigma" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\sigma" title="\sigma" /></a>来表示，对于单元j，其形式如下：
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\sigma_{j}=\frac{\partial&space;O}{\partial&space;\alpha_{j}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\sigma_{j}=\frac{\partial&space;O}{\partial&space;\alpha_{j}}" title="\sigma_{j}=\frac{\partial O}{\partial \alpha_{j}}" /></a>
 
@@ -97,7 +97,7 @@ MLP 的 BP 算法基于经典的链式求导法则，首先看前向传导，对
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190602202520987.png)
 
-其中$a_{k}=\sum_{h}w_{hk}b_{h}$ ，对于sigmod层，向倒数第二层的反向传递公式为：
+其中<a href="https://www.codecogs.com/eqnedit.php?latex=a_{k}=\sum_{h}w_{hk}b_{h}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?a_{k}=\sum_{h}w_{hk}b_{h}" title="a_{k}=\sum_{h}w_{hk}b_{h}" /></a> ，对于sigmod层，向倒数第二层的反向传递公式为：
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190602202642673.png)
 
@@ -113,5 +113,5 @@ MLP 的 BP 算法基于经典的链式求导法则，首先看前向传导，对
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\frac{\partial&space;O}{\partial&space;\omega_{ij}}=\frac{\partial&space;O}{\partial&space;\alpha_{j}}\cdot&space;\frac{\partial&space;\alpha_{j}}{\partial&space;\omega_{ij}}=\sigma_{j}b_{i}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\frac{\partial&space;O}{\partial&space;\omega_{ij}}=\frac{\partial&space;O}{\partial&space;\alpha_{j}}\cdot&space;\frac{\partial&space;\alpha_{j}}{\partial&space;\omega_{ij}}=\sigma_{j}b_{i}" title="\frac{\partial O}{\partial \omega_{ij}}=\frac{\partial O}{\partial \alpha_{j}}\cdot \frac{\partial \alpha_{j}}{\partial \omega_{ij}}=\sigma_{j}b_{i}" /></a>
 
-至此完成了backwark pass的过程，注意由于计算比较复杂，有必要进行梯度验证。对函数O关于参数$\omega_{ij}$ 进行数值求导即可，求导之后与与上边的公式验证差异，小于给定的阈值即认为我们的运算是正确的。
+至此完成了backwark pass的过程，注意由于计算比较复杂，有必要进行梯度验证。对函数O关于参数<a href="https://www.codecogs.com/eqnedit.php?latex=\omega_{ij}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\omega_{ij}" title="\omega_{ij}" /></a>进行数值求导即可，求导之后与与上边的公式验证差异，小于给定的阈值即认为我们的运算是正确的。
 
