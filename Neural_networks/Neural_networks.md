@@ -57,7 +57,11 @@ MLP 的 BP 算法基于经典的链式求导法则，首先看前向传导，对
 
 反向传播过程
 
-有了以上前向传导的过程，接下来看误差的反向传递，对于sigmod来说，最后一层的计算如下：$\alpha=\sum_{h}\omega_{h}\cdot b_{h},y=f(\alpha)=\sigma (\alpha)$这里 $b_{h}$ 为倒数第二层单元h的输出，σ为sigmod激活函数，且满足 σ′(a)=σ(a)(1−σ(a))，对于单个样本的损失 ：
+有了以上前向传导的过程，接下来看误差的反向传递，对于sigmod来说，最后一层的计算如下：
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=\alpha=\sum_{h}\omega_{h}\cdot&space;b_{h},y=f(\alpha)=\sigma&space;(\alpha)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha=\sum_{h}\omega_{h}\cdot&space;b_{h},y=f(\alpha)=\sigma&space;(\alpha)" title="\alpha=\sum_{h}\omega_{h}\cdot b_{h},y=f(\alpha)=\sigma (\alpha)" /></a>
+
+这里<a href="https://www.codecogs.com/eqnedit.php?latex=b_{h}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?b_{h}" title="b_{h}" /></a>为倒数第二层单元h的输出，σ为sigmod激活函数，且满足σ′(a)=σ(a)(1−σ(a))，对于单个样本的损失 ：
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=O=-\left&space;[&space;zlog(\sigma&space;(\alpha))&plus;(1-z)log(1-\sigma&space;(\alpha))&space;\right&space;]" target="_blank"><img src="https://latex.codecogs.com/gif.latex?O=-\left&space;[&space;zlog(\sigma&space;(\alpha))&plus;(1-z)log(1-\sigma&space;(\alpha))&space;\right&space;]" title="O=-\left [ zlog(\sigma (\alpha))+(1-z)log(1-\sigma (\alpha)) \right ]" /></a>
 
