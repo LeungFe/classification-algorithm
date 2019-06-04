@@ -69,7 +69,7 @@ MLP 的 BP 算法基于经典的链式求导法则，首先看前向传导，对
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\frac{\partial&space;O}{\partial&space;\omega_{h}}=\frac{\partial&space;O}{\partial&space;\alpha}\cdot&space;\frac{\partial&space;\alpha}{\partial\omega&space;_{h}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\frac{\partial&space;O}{\partial&space;\omega_{h}}=\frac{\partial&space;O}{\partial&space;\alpha}\cdot&space;\frac{\partial&space;\alpha}{\partial\omega&space;_{h}}" title="\frac{\partial O}{\partial \omega_{h}}=\frac{\partial O}{\partial \alpha}\cdot \frac{\partial \alpha}{\partial\omega _{h}}" /></a>
 
-显而易见对于后半部分<a href="https://www.codecogs.com/eqnedit.php?latex=\frac{\partial&space;\alpha}{\partial\omega&space;_{h}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\frac{\partial&space;\alpha}{\partial\omega&space;_{h}}" title="\frac{\partial \alpha}{\partial\omega _{h}}" /></a>为$b_{h}$，对于前半部分$\frac{\partial O}{\partial \alpha}$：
+显而易见对于后半部分<a href="https://www.codecogs.com/eqnedit.php?latex=\frac{\partial&space;\alpha}{\partial\omega&space;_{h}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\frac{\partial&space;\alpha}{\partial\omega&space;_{h}}" title="\frac{\partial \alpha}{\partial\omega _{h}}" /></a>为<a href="https://www.codecogs.com/eqnedit.php?latex=b_{h}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?b_{h}" title="b_{h}" /></a>，对于前半部分<a href="https://www.codecogs.com/eqnedit.php?latex=\frac{\partial&space;O}{\partial&space;\alpha}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\frac{\partial&space;O}{\partial&space;\alpha}" title="\frac{\partial O}{\partial \alpha}" /></a>：
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190602201458449.png)
 
