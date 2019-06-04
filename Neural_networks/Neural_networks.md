@@ -55,3 +55,59 @@ MLP 的 BP 算法基于经典的链式求导法则，首先看前向传导，对
 
 以上便是softmax的损失函数，这里需要注意的是以上优化目标O均没带正则项，而且logistic与softmax最后得到的损失函数均可以称作交叉熵损失，注意和平方损失的区别。
 
+反向传播过程
+
+有了以上前向传导的过程，接下来看误差的反向传递，对于sigmod来说，最后一层的计算如下：$\alpha=\sum_{h}\omega_{h}\cdot b_{h},y=f(\alpha)=\sigma (\alpha)$这里 $b_{h}$ 为倒数第二层单元h的输出，σ为sigmod激活函数，且满足 σ′(a)=σ(a)(1−σ(a))，对于单个样本的损失 ：
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=O=-\left&space;[&space;zlog(\sigma&space;(\alpha))&plus;(1-z)log(1-\sigma&space;(\alpha))&space;\right&space;]" target="_blank"><img src="https://latex.codecogs.com/gif.latex?O=-\left&space;[&space;zlog(\sigma&space;(\alpha))&plus;(1-z)log(1-\sigma&space;(\alpha))&space;\right&space;]" title="O=-\left [ zlog(\sigma (\alpha))+(1-z)log(1-\sigma (\alpha)) \right ]" /></a>
+
+可得到如下的链式求导过程：
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=\frac{\partial&space;O}{\partial&space;\omega_{h}}=\frac{\partial&space;O}{\partial&space;\alpha}\cdot&space;\frac{\partial&space;\alpha}{\partial\omega&space;_{h}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\frac{\partial&space;O}{\partial&space;\omega_{h}}=\frac{\partial&space;O}{\partial&space;\alpha}\cdot&space;\frac{\partial&space;\alpha}{\partial\omega&space;_{h}}" title="\frac{\partial O}{\partial \omega_{h}}=\frac{\partial O}{\partial \alpha}\cdot \frac{\partial \alpha}{\partial\omega _{h}}" /></a>
+
+显而易见对于后半部分<a href="https://www.codecogs.com/eqnedit.php?latex=\frac{\partial&space;\alpha}{\partial\omega&space;_{h}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\frac{\partial&space;\alpha}{\partial\omega&space;_{h}}" title="\frac{\partial \alpha}{\partial\omega _{h}}" /></a>为$b_{h}$，对于前半部分$\frac{\partial O}{\partial \alpha}$：
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190602201458449.png)
+
+以上，便得到了logistic的残差，接下来残差反向传递即可，残差传递形式同softmax，所以先推导softmax的残差项，对于单个样本，softmax的log损失函数为：
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=O=-\sum&space;_{i}z_{i}logy_{i}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?O=-\sum&space;_{i}z_{i}logy_{i}" title="O=-\sum _{i}z_{i}logy_{i}" /></a>
+
+其中：
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=y_{i}=\frac{e^{\alpha_{i}}}{\sum&space;_{j}e^{\alpha_{j}}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?y_{i}=\frac{e^{\alpha_{i}}}{\sum&space;_{j}e^{\alpha_{j}}}" title="y_{i}=\frac{e^{\alpha_{i}}}{\sum _{j}e^{\alpha_{j}}}" /></a>
+
+根据以上分析，可得到$y_{k^{'}}$关于$\alpha_{k}$的导数：
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190602201912319.png)
+
+现在能得到损失函数O对于$\alpha_{k}$的导数：
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190602202002159.png)
+
+这里有$\sum_{i}z_{i}=1$，即只有一个类别，到这一步，softmax和sigmod的残差均计算完成，可用$\sigma$来表示，对于单元j，其形式如下：
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=\sigma_{j}=\frac{\partial&space;O}{\partial&space;\alpha_{j}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\sigma_{j}=\frac{\partial&space;O}{\partial&space;\alpha_{j}}" title="\sigma_{j}=\frac{\partial O}{\partial \alpha_{j}}" /></a>
+
+这里可以得到softmax层向倒数第二层的残差反向传递公式：
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190602202520987.png)
+
+其中$a_{k}=\sum_{h}w_{hk}b_{h}$ ，对于sigmod层，向倒数第二层的反向传递公式为：
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190602202642673.png)
+
+以上公式的 δ 代表sigmod层唯一的残差，接下来就是残差从隐层向前传递的传递过程，一直传递到首个隐藏层即第二层（注意，残差不会传到输入层，因为不需要，对输入层到第二层的参数求导，其只依赖于第二层的残差，因为第二层是这些参数的放射函数）：
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190602202722337.png)
+
+整个过程可以看下图：
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190602202827896.gif)
+
+最终得到关于权值的计算公式：
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=\frac{\partial&space;O}{\partial&space;\omega_{ij}}=\frac{\partial&space;O}{\partial&space;\alpha_{j}}\cdot&space;\frac{\partial&space;\alpha_{j}}{\partial&space;\omega_{ij}}=\sigma_{j}b_{i}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\frac{\partial&space;O}{\partial&space;\omega_{ij}}=\frac{\partial&space;O}{\partial&space;\alpha_{j}}\cdot&space;\frac{\partial&space;\alpha_{j}}{\partial&space;\omega_{ij}}=\sigma_{j}b_{i}" title="\frac{\partial O}{\partial \omega_{ij}}=\frac{\partial O}{\partial \alpha_{j}}\cdot \frac{\partial \alpha_{j}}{\partial \omega_{ij}}=\sigma_{j}b_{i}" /></a>
+
+至此完成了backwark pass的过程，注意由于计算比较复杂，有必要进行梯度验证。对函数O关于参数$\omega_{ij}$ 进行数值求导即可，求导之后与与上边的公式验证差异，小于给定的阈值即认为我们的运算是正确的。
+
