@@ -55,3 +55,51 @@
 优点：模型形式简单、模型可解释性好、实现简单、占用资源少、效果也不错
 
 缺点：准确率并不高、很难处理数据不平衡的问题，如果不加入其它方法的情况下很难处理非线性问题
+
+逻辑回归的思想：根据现有数据对分类边界线建立回归公式，以此进行分类（主要用于解决二分类问题）
+
+sigmoid函数
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190410105933692.png)
+
+其函数图像为
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190410110016296.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDc2NjE3OQ==,size_16,color_FFFFFF,t_70)
+
+逻辑回归模型函数
+
+![](https://img-blog.csdnimg.cn/20190410110106286.png)
+
+通过sigmoid函数，构造逻辑回归模型函数：
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190410110300706.png)
+
+使用 sigmoid 函数求解出来的值为类1的后验估计 p(y=1|x,θ) ,可以得到：
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190410110429381.png)
+
+使用 sigmoid 函数求解出来的值为类0的后验估计 p(y=0|x,θ) ,可以得到：
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190410110508418.png)
+
+对上述两个公式进行整理，得到
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190410110554814.png)
+
+然后得到其似然函数：
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190410111635121.png)
+
+对数似然函数：
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190410111706137.png)
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190410111911281.png)
+
+对其求偏导：
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190410112012393.png)
+
+更新参数 θ：
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190410112113514.png)
