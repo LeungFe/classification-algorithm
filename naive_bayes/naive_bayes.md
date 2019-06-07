@@ -27,24 +27,24 @@
 
 朴素贝叶斯的假设：每个特征都是独立同分布的，每个特征同等重要，即每个特征是等权重的，只考虑特征是否出现，不考虑特征出现的次数。
 
-以垃圾邮件分类为例子来介绍朴素贝叶斯，假设邮件$X=(x_{1},x_{2},...,x_{n})$，$y=0$表示正常邮件，$y=1$表示垃圾邮件，判断该邮件是否为垃圾邮件，只需要判断$P(y=0|X)$和$P(y=1|X)$哪个概率大就可以。
+以垃圾邮件分类为例子来介绍朴素贝叶斯，假设邮件<a href="https://www.codecogs.com/eqnedit.php?latex=X=(x_{1},x_{2},...,x_{n})，y=0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?X=(x_{1},x_{2},...,x_{n})，y=0" title="X=(x_{1},x_{2},...,x_{n})，y=0" /></a>表示正常邮件，y=1表示垃圾邮件，判断该邮件是否为垃圾邮件，只需要判断<a href="https://www.codecogs.com/eqnedit.php?latex=P(y=0|X)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(y=0|X)" title="P(y=0|X)" /></a>和<a href="https://www.codecogs.com/eqnedit.php?latex=P(y=1|X)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(y=1|X)" title="P(y=1|X)" /></a>哪个概率大就可以。
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=P(y=0|X)=\frac{P(X|y=0)*P(y=0)}{P(X)}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(y=0|X)=\frac{P(X|y=0)*P(y=0)}{P(X)}" title="P(y=0|X)=\frac{P(X|y=0)*P(y=0)}{P(X)}" /></a>
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=P(y=1|X)=\frac{P(X|y=1)*P(y=1)}{P(X)}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(y=1|X)=\frac{P(X|y=1)*P(y=1)}{P(X)}" title="P(y=1|X)=\frac{P(X|y=1)*P(y=1)}{P(X)}" /></a>
 
-其中$P(y=0)$和$P(y=1)$表示先验概率，$P(X|y=0)$和$P(X|y=1)$表示条件概率。
+其中P(y=0)和P(y=1)表示先验概率，<a href="https://www.codecogs.com/eqnedit.php?latex=P(X|y=0)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X|y=0)" title="P(X|y=0)" /></a>和<a href="https://www.codecogs.com/eqnedit.php?latex=P(X|y=1)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X|y=1)" title="P(X|y=1)" /></a>表示条件概率。
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=P(y=0)=\frac{N_{y=0}}{N}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(y=0)=\frac{N_{y=0}}{N}" title="P(y=0)=\frac{N_{y=0}}{N}" /></a>
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=P(y=1)=\frac{N_{y=1}}{N}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(y=1)=\frac{N_{y=1}}{N}" title="P(y=1)=\frac{N_{y=1}}{N}" /></a>
 
-其中$N_{y=0}$表示正常邮件的数量，$N_{y=1}$表示垃圾邮件的数量，$N$表示总邮件数量。
+其中<a href="https://www.codecogs.com/eqnedit.php?latex=N_{y=0}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?N_{y=0}" title="N_{y=0}" /></a>表示正常邮件的数量，<a href="https://www.codecogs.com/eqnedit.php?latex=N_{y=1}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?N_{y=1}" title="N_{y=1}" /></a>表示垃圾邮件的数量，N表示总邮件数量。
 
-$P(X|y=0)$可以表示为$P(x_{1},x_{2},...,x_{n}|y=0)$，$P(X|y=1)$可以表示为$P(x_{1},x_{2},...,x_{n}|y=1)$，因为朴素贝叶斯假设每个特征是相互独立的，所以：
+<a href="https://www.codecogs.com/eqnedit.php?latex=P(X|y=0)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X|y=0)" title="P(X|y=0)" /></a>可以表示为<a href="https://www.codecogs.com/eqnedit.php?latex=P(x_{1},x_{2},...,x_{n}|y=0)$，$P(X|y=1)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(x_{1},x_{2},...,x_{n}|y=0)$，$P(X|y=1)" title="P(x_{1},x_{2},...,x_{n}|y=0)$，$P(X|y=1)" /></a>可以表示为<a href="https://www.codecogs.com/eqnedit.php?latex=P(x_{1},x_{2},...,x_{n}|y=1)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(x_{1},x_{2},...,x_{n}|y=1)" title="P(x_{1},x_{2},...,x_{n}|y=1)" /></a>，因为朴素贝叶斯假设每个特征是相互独立的，所以：
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=P(x_{1},x_{2},...,x_{n}|y=0)=P(x_{1}|y=0)\cdot&space;P(x_{2}|y=0)\cdot&space;...\cdot&space;P(x_{n}|y=0)\\&space;=\prod_{k=1}^{n}P(x_{k}|y=0)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(x_{1},x_{2},...,x_{n}|y=0)=P(x_{1}|y=0)\cdot&space;P(x_{2}|y=0)\cdot&space;...\cdot&space;P(x_{n}|y=0)\\&space;=\prod_{k=1}^{n}P(x_{k}|y=0)" title="P(x_{1},x_{2},...,x_{n}|y=0)=P(x_{1}|y=0)\cdot P(x_{2}|y=0)\cdot ...\cdot P(x_{n}|y=0)\\ =\prod_{k=1}^{n}P(x_{k}|y=0)" /></a>
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=P(x_{1},x_{2},...,x_{n}|y=1)=P(x_{1}|y=1)\cdot&space;P(x_{2}|y=1)\cdot&space;...\cdot&space;P(x_{n}|y=1)\\&space;=\prod_{k=1}^{n}P(x_{k}|y=1)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(x_{1},x_{2},...,x_{n}|y=1)=P(x_{1}|y=1)\cdot&space;P(x_{2}|y=1)\cdot&space;...\cdot&space;P(x_{n}|y=1)\\&space;=\prod_{k=1}^{n}P(x_{k}|y=1)" title="P(x_{1},x_{2},...,x_{n}|y=1)=P(x_{1}|y=1)\cdot P(x_{2}|y=1)\cdot ...\cdot P(x_{n}|y=1)\\ =\prod_{k=1}^{n}P(x_{k}|y=1)" /></a>
 
-所以只需要比较$P(y=0)*\prod_{k=1}^{n}P(x_{k}|y=0)$和$P(y=1)*\prod_{k=1}^{n}P(x_{k}|y=1)$的大小就可以判断是否为垃圾邮件。
+所以只需要比较<a href="https://www.codecogs.com/eqnedit.php?latex=P(y=0)*\prod_{k=1}^{n}P(x_{k}|y=0)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(y=0)*\prod_{k=1}^{n}P(x_{k}|y=0)" title="P(y=0)*\prod_{k=1}^{n}P(x_{k}|y=0)" /></a>和<a href="https://www.codecogs.com/eqnedit.php?latex=P(y=1)*\prod_{k=1}^{n}P(x_{k}|y=1)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(y=1)*\prod_{k=1}^{n}P(x_{k}|y=1)" title="P(y=1)*\prod_{k=1}^{n}P(x_{k}|y=1)" /></a>的大小就可以判断是否为垃圾邮件。
